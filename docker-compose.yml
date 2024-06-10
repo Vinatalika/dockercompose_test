@@ -7,8 +7,11 @@ services:
       - target: 8081
         published: 8081
     depends_on:
+      - redis
       - person-db
     environment:
+      - REDIS_HOST=localhost
+      - REDIS_PORT=6379
       - SPRING_DATASOURCE_URL=jdbc:postgresql://person-db:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
@@ -18,3 +21,6 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+  redis:
+    image: redis
+    container_name: redis
